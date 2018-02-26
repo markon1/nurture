@@ -48,7 +48,44 @@ var connections = [{
   value: 5,
   date: new Date('02-04-2018'),
   tags: ['Netflix', 'streaming', 'movies', 'CEO']
+}, {
+  id: 4,
+  info: {
+    profileImg: 'https://media.licdn.com/dms/image/C4D03AQFt4Y37idkjiw/profile-displayphoto-shrink_200_200/0?e=1524445200&v=alpha&t=qBQqLsVBMla1C-GA_ExgTAumekwaI3CQwbyojuHqDds',
+    name: 'Jacques Clerx',
+    bio: 'Project Planner Allseas'
+  },
+  notes: 'Commercial projects and Capex',
+  value: 2,
+  date: new Date('02-24-2018'),
+  tags: ['Netherlands', 'oil', 'energy']
+}, {
+  id: 5,
+  info: {
+    profileImg: 'https://media.licdn.com/dms/image/C4E03AQEkd1NhaytheQ/profile-displayphoto-shrink_200_200/0?e=1524445200&v=alpha&t=EEzwRgKFaMXZGP3fvhj04f4SbbZWJyvHfA54PfscuGE',
+    name: 'Erik Sawyer',
+    bio: 'Senior Consultant at Driver Trett'
+  },
+  notes: 'Vattenfall, Sawyer Project Services, Mammoet',
+  value: 1,
+  date: new Date('02-18-2018'),
+  tags: ['senior', 'consultant', 'Netherlands']
+}, {
+  id: 6,
+  info: {
+    profileImg: 'https://media-exp2.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAruAAAAJGE3YWM4NmIxLWM1OWUtNGNhNy04OWUxLWZhYmVhZTEzNTNjNA.jpg',
+    name: 'Joyce van Brosten',
+    bio: 'Scheduler at ExxonMobil'
+  },
+  notes: 'Rotterdam Area, Netherlands',
+  value: 5,
+  date: new Date('02-26-2018'),
+  tags: ['Netherlands', 'oil', 'energy', 'scheduler']
 }]
+
+connections.sort((a, b) => {
+  return b.value - a.value
+})
 
 /* eslint-disable no-new */
 new Vue({

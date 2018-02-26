@@ -76,7 +76,7 @@ export default {
   props: ["connectionsProp"],
   data: function() {
     return {
-      sortKey: "date",
+      sortKey: "value",
       reverse: false,
       notesFilter: "",
       tagsFilter: "",
@@ -109,15 +109,15 @@ export default {
               )
           );
         })
-        .sort((a, b) => {
-          return this.reverse ? b[this.sortKey] - a[this.sortKey] : a[this.sortKey] - b[this.sortKey];
-        });
     }
   },
   methods: {
     sortBy: function (sortKey,dir) {
       this.reverse = dir;
       this.sortKey = sortKey;
+      this.connections.sort((a, b) => {
+          return this.reverse ? a[this.sortKey] - b[this.sortKey] : b[this.sortKey] - a[this.sortKey];
+      });
     }
   }
 };
