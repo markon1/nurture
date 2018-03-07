@@ -35,7 +35,7 @@ function convertDate(dt){
 
 export default {
   name: "Connection",
-  props: ["connProp", "overdue","apiUrl"],
+  props: ["connProp", "overdue","apiURL"],
   data: function() {
     return {
       conn: this.connProp
