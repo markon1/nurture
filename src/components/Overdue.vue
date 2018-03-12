@@ -1,16 +1,14 @@
 <template>
     <div role="tabpanel" class="tab-pane" id="overdue">
         <h2>Overdue</h2>
-        <div class='row'>
-            <div class='col-lg-6 col-md-7 col-sm-11 col-xs-24'></div>
-            <div class='col-lg-6 col-md-5 col-sm-13 col-xs-24'>
+        <div class='row searchHeading'>
+            <div class='col-lg-offset-1 col-lg-2 col-md-offset-1 col-md-2 col-sm-offset-1 col-sm-3 col-xs-offset-1 col-xs-3'></div>
+            <div class='col-lg-offset-0 col-lg-5 col-md-offset-0 col-md-7 col-sm-offset-0 col-sm-9 col-xs-offset-1 col-xs-24'></div>
+            <div class='col-lg-offset-0 col-lg-5 col-md-offset-0 col-md-19 col-sm-offset-0 col-sm-16 col-xs-offset-1 col-xs-28'>
                 Notes
                 <input v-model='notesFilter' class="form-control" placeholder="filter notes">
-            </div>
-            <div class='col-md-2'>
-                Actions
-            </div>
-            <div class='col-lg-3 col-md-4 col-sm-5 col-xs-24'>
+            </div>            
+            <div class='col-lg-offset-0 col-lg-4 col-md-offset-1 col-md-5 col-sm-offset-1 col-sm-6 col-xs-offset-1 col-xs-10 valueHead'>
                 Value
                 <a href="#" @click="sortBy('value',false)" v-bind:class="{activeSort: sortKey == 'value' && reverse == false}">&#9650;</a>
                 <a href="#" @click="sortBy('value',true)" v-bind:class="{activeSort: sortKey == 'value' && reverse == true}">&#9660;</a>
@@ -24,20 +22,25 @@
                   <option value=5>5</option>
                 </select>
                 </div>
-            <div class='col-lg-3 col-md-4 col-sm-5 col-xs-24'>
+            <div class='col-lg-offset-0 col-lg-3 col-md-offset-0 col-md-4 col-sm-offset-1 col-sm-5 col-xs-offset-0 col-xs-7 dateHead'>
                 Date
                 <a href="#" @click="sortBy('date',false)" v-bind:class="{activeSort: sortKey == 'date' && reverse == false}">&#9650;</a>
                 <a href="#" @click="sortBy('date',true)" v-bind:class="{activeSort: sortKey == 'date' && reverse == true}">&#9660;</a>                
             </div>            
-            <div class='col-lg-6 col-md-4 col-sm-14 col-xs-24'>
+            <div class='col-lg-offset-0 col-lg-5 col-md-offset-0 col-md-14 col-sm-offset-0 col-sm-10 col-xs-offset-1 col-xs-28'>
                 Tags
                 <input v-model="tagsFilter" class="form-control" placeholder="filter tags">
+            </div>
+            <div class='col-lg-offset-0 col-lg-4 col-md-offset-0 col-md-5 col-sm-offset-0 col-sm-6 col-xs-offset-1 col-xs-28'>
+                Actions
             </div>
         </div>
         <br>
         <hr>
-        <div class='row' v-for='conn in filteredConnections' v-bind:key='conn._id'>
-          <connection :connProp='conn' :overdue='true'  :apiURL='apiURL'></connection>               
+        <div class='container-fluid'>
+          <div class='row' v-for='conn in filteredConnections' v-bind:key='conn._id'>
+            <connection :connProp='conn' :overdue='true'  :apiURL='apiURL'></connection>               
+          </div>
         </div>
     </div>
 </template>
@@ -45,7 +48,7 @@
 <script>
 export default {
   name: "Overdue",
-  props: ["connectionsProp","apiURL"],
+  props: ["connectionsProp", "apiURL"],
   data: function() {
     return {
       sortKey: "value",
@@ -103,9 +106,9 @@ export default {
 </script>
 
 <style>
-.row{
-  margin-bottom:15px;
-  padding-bottom:15px;
+.row {
+  margin-bottom: 15px;
+  padding-bottom: 15px;
   border-bottom: 1px solid black;
 }
 

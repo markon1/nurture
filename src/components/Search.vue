@@ -1,14 +1,14 @@
 <template>
     <div role="tabpanel" class="tab-pane" id="search">
         <h2>Search</h2>
-        <div class='row'>
-            <div class='head80'></div>
-            <div class='col-lg-4 col-md-5 col-sm-8 col-xs-18 infoHead'></div>
-            <div class='col-lg-6 col-md-5 col-sm-13 col-xs-24 notesHead'>
+        <div class='row searchHeading'>
+            <div class='col-lg-offset-1 col-lg-2 col-md-offset-1 col-md-2 col-sm-offset-1 col-sm-3 col-xs-offset-1 col-xs-3'></div>
+            <div class='col-lg-offset-0 col-lg-5 col-md-offset-0 col-md-5 col-sm-offset-0 col-sm-9 col-xs-offset-1 col-xs-24'></div>
+            <div class='col-lg-offset-0 col-lg-7 col-md-offset-0 col-md-6 col-sm-offset-0 col-sm-16 col-xs-offset-1 col-xs-28'>
                 Notes
                 <input v-model='notesFilter' class="form-control" placeholder="filter notes">
             </div>            
-            <div class='col-lg-3 col-md-4 col-sm-5 col-xs-24 valueHead'>
+            <div class='col-lg-offset-0 col-lg-4 col-md-offset-0 col-md-5 col-sm-offset-1 col-sm-6 col-xs-offset-1 col-xs-10'>
                 Value
                 <a href="#" @click="sortBy('value',false)" v-bind:class="{activeSort: sortKey == 'value' && reverse == false}">&#9650;</a>
                 <a href="#" @click="sortBy('value',true)" v-bind:class="{activeSort: sortKey == 'value' && reverse == true}">&#9660;</a>
@@ -22,27 +22,28 @@
                   <option value=5>5</option>
                 </select>                
             </div>
-            <div class='col-lg-3 col-md-4 col-sm-5 col-xs-24 dateHead'>
+            <div class='col-lg-offset-0 col-lg-3 col-md-offset-0 col-md-4 col-sm-offset-0 col-sm-6 col-xs-offset-0 col-xs-7 dateHead'>
                 Date
                 <!--<datepicker v-model='dateFilter' format='MM-dd-yyyy' :clear-button='true' input-class='form-control dateInput'></datepicker>-->
                 <a href="#" @click="sortBy('date',false)" v-bind:class="{activeSort: sortKey == 'date' && reverse == false}">&#9650;</a>
                 <a href="#" @click="sortBy('date',true)" v-bind:class="{activeSort: sortKey == 'date' && reverse == true}">&#9660;</a>                
             </div>
-            <div class='col-lg-6 col-md-4 col-sm-14 col-xs-24 tagsHead'>
+            <div class='col-lg-offset-0 col-lg-7 col-md-offset-0 col-md-6 col-sm-offset-0 col-sm-16 col-xs-offset-1 col-xs-28'>
                 Tags
                 <input v-model="tagsFilter" class="form-control" placeholder="filter tags">
             </div>
         </div>
         <br>
         <hr>
-        <div class='row' v-for='conn in filteredConnections' v-bind:key='conn._id'>
-          <connection :connProp='conn' :overdue='false' :apiURL='apiURL'></connection>          
+        <div class='container-fluid'>
+          <div class='row' v-for='conn in filteredConnections' v-bind:key='conn._id'>
+            <connection :connProp='conn' :overdue='false' :apiURL='apiURL'></connection>          
+          </div>
         </div>
     </div>
 </template>
 
 <script>
-const apiURL = "http://localhost:8080/connections/";
 export default {
   name: "Search",
   props: ["connectionsProp","apiURL"],
@@ -106,12 +107,13 @@ export default {
   margin-bottom:15px;
 }
 
-.row > div {
+.searchHeading > div {
   margin-bottom:10px;
+  text-align: center;
 }
 
-.head80{
-  width:80px !important;
+.dateHead{
+  text-align: left !important;
 }
 
 .activeSort,

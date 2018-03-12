@@ -1,26 +1,26 @@
 <template>
   <div class='connection'>
-    <div v-bind:class="[ overdue ? 'col-lg-1 col-md-1 col-sm-3 col-xs-6' : 'col-lg-2 col-md-2 col-sm-3 col-xs-6','info']">
+    <div v-bind:class="[ overdue ? 'col-lg-offset-1 col-lg-2 col-md-offset-1 col-md-2 col-sm-offset-1 col-sm-3 col-xs-offset-1 col-xs-3' : 'col-lg-offset-1 col-lg-2 col-md-offset-1 col-md-2 col-sm-offset-1 col-sm-3 col-xs-offset-1 col-xs-3','info']">
       <img :src='conn.info.profileImg' class='profileImg'>
     </div>
-    <div v-bind:class="[ overdue ? 'col-lg-3 col-md-3 col-sm-8 col-xs-18' : 'col-lg-4 col-md-5 col-sm-8 col-xs-18','infoText']">
-      <strong>{{conn.info.name}}</strong>
+    <div v-bind:class="[ overdue ? 'col-lg-offset-0 col-lg-5 col-md-offset-0 col-md-7 col-sm-offset-0 col-sm-9 col-xs-offset-1 col-xs-24' : 'col-lg-offset-0 col-lg-5 col-md-offset-0 col-md-5 col-sm-offset-0 col-sm-9 col-xs-offset-1 col-xs-24','infoText']">
+      <a :href='conn.connURL'>{{conn.info.name}}</a>
       <br>
       <p>{{conn.info.bio}}</p>
     </div>
-    <div v-bind:class="[ overdue ? 'col-lg-5 col-md-3 col-sm-13 col-xs-24' : 'col-lg-6 col-md-5 col-sm-13 col-xs-24','notes']">
+    <div v-bind:class="[ overdue ? 'col-lg-offset-0 col-lg-5 col-md-offset-0 col-md-19 col-sm-offset-0 col-sm-16 col-xs-offset-1 col-xs-28' : 'col-lg-offset-0 col-lg-7 col-md-offset-0 col-md-6 col-sm-offset-0 col-sm-16 col-xs-offset-1 col-xs-28','notes']">
       <textarea v-model.lazy='conn.notes' @change="patch('notes')" placeholder="Notes"></textarea>
     </div>
-	<div v-bind:class="[ overdue ? 'col-lg-3 col-md-4 col-sm-5 col-xs-24' : 'col-lg-3 col-md-4 col-sm-5 col-xs-24','value']">
+	<div v-bind:class="[ overdue ? 'col-lg-offset-0 col-lg-4 col-md-offset-1 col-md-5 col-sm-offset-1 col-sm-6 col-xs-offset-1 col-xs-10' : 'col-lg-offset-0 col-lg-4 col-md-offset-0 col-md-5 col-sm-offset-1 col-sm-6 col-xs-offset-1 col-xs-10','value']">
       <star-rating v-model='conn.value' :star-size='25' :show-rating='false' @rating-selected="patch('value')"></star-rating>
     </div>
-    <div v-bind:class="[ overdue ? 'col-lg-3 col-md-4 col-sm-5 col-xs-24' : 'col-lg-3 col-md-4 col-sm-5 col-xs-24','dueDate']">
+    <div v-bind:class="[ overdue ? 'col-lg-offset-0 col-lg-3 col-md-offset-0 col-md-4 col-sm-offset-1 col-sm-5 col-xs-offset-0 col-xs-7' : 'col-lg-offset-0 col-lg-3 col-md-offset-0 col-md-4 col-sm-offset-0 col-sm-6 col-xs-offset-0 col-xs-7','dueDate']">
       <datepicker v-model='conn.date' input-class='form-control dateInput' @input="patch('date')"></datepicker>
     </div>
-    <div v-bind:class="[ overdue ? 'col-lg-5 col-md-4 col-sm-16 col-xs-24' : 'col-lg-6 col-md-4 col-sm-14 col-xs-24','tags']">
+    <div v-bind:class="[ overdue ? 'col-lg-offset-0 col-lg-5 col-md-offset-0 col-md-14 col-sm-offset-0 col-sm-10 col-xs-offset-1 col-xs-28' : 'col-lg-offset-0 col-lg-7 col-md-offset-0 col-md-6 col-sm-offset-0 col-sm-16 col-xs-offset-1 col-xs-28','tags']">
       <input-tag :tags.sync='conn.tags' @update:tags="patch('tags')"></input-tag>
     </div>
-	<div class='actions col-lg-3 col-md-5 col-sm-24 col-xs-24' v-if="overdue">
+	<div class='actions col-lg-offset-0 col-lg-4 col-md-offset-0 col-md-5 col-sm-offset-0 col-sm-6 col-xs-offset-1 col-xs-28' v-if="overdue">
       <button class="btn btn-danger closeBtn" @click="close">Close</button><button class="btn btn-warning snoozeBtn" @click="snooze">Snooze</button>
     </div>
   </div>
@@ -28,14 +28,14 @@
 
 <script>
 // converts date to YYYYMMDD format
-function convertDate(dt){
-    let d = new Date(dt);
-    return d.toISOString().slice(0,10);
+function convertDate(dt) {
+  let d = new Date(dt);
+  return d.toISOString().slice(0, 10);
 }
 
 export default {
   name: "Connection",
-  props: ["connProp", "overdue","apiURL"],
+  props: ["connProp", "overdue", "apiURL"],
   data: function() {
     return {
       conn: this.connProp
@@ -50,15 +50,17 @@ export default {
         contentType: "application/json",
         dataType: "json"
       });
-	},
-	close : function(){
-		this.conn.date = '';
-		this.patch('date');
-	},
-	snooze : function(){
-		this.conn.date = convertDate(new Date(Date.now() + 3*24*60*60*1000));
-		this.patch('date');
-	}
+    },
+    close: function() {
+      this.conn.date = "";
+      this.patch("date");
+    },
+    snooze: function() {
+      this.conn.date = convertDate(
+        new Date(Date.now() + 3 * 24 * 60 * 60 * 1000)
+      );
+      this.patch("date");
+    }
   }
 };
 </script>
@@ -68,21 +70,23 @@ export default {
   margin-bottom: 10px;
 }
 
-.dueDate,.dateHead{
-	max-width:130px;
-}
-
 .date-picker {
   width: 115px;
 }
 
-.value,.valueHead{
-	max-width:140px !important;
+.vue-star-rating {
+  text-align: center;
+  display: block !important;
 }
 
-.info {
-  word-wrap: break-word;
-  width:80px !important;
+.actions {
+  text-align: center;
+}
+
+@media (max-width: 767px) {
+  .vue-star-rating > .vue-star-rating, .dueDate, .actions {
+    text-align: left;
+  }
 }
 
 .profileImg {
@@ -91,7 +95,7 @@ export default {
 }
 
 .infoText {
-  padding-left: 28px;
+  padding-left: 32px;
   min-height: 80px;
   max-height: 120px;
   overflow-y: auto;
@@ -131,15 +135,11 @@ textarea {
   border-radius: 4px !important;
 }
 
-.actions{
-	text-align: left;
+.actions > button {
+  display: inline-block;
 }
 
-.actions > button{
-	display: inline-block;
-}
-
-.closeBtn{
-	margin-right:7px;
+.closeBtn {
+  margin-right: 4px;
 }
 </style>
