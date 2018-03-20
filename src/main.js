@@ -17,7 +17,7 @@ Vue.component('InputTag', InputTag)
 
 Vue.config.productionTip = false
 
-const apiURL = 'http://nurtur3.herokuapp.com/connections/'
+const apiURL = 'https://nurtur3.herokuapp.com/connections/'
 var connections = []
 
 function getConnections () {

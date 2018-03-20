@@ -89,9 +89,15 @@ export default {
       this.sortKey = sortKey;
       if (sortKey == "date") {
         this.connections.sort((a, b) => {
-          return this.reverse
-            ? (!!a.date && !!b.date ? new Date(a.date) - new Date(b.date) : 1)
-            : (!!b.date && !!a.date ? new Date(b.date) - new Date(a.date) : 1) 
+         if (!a.date && !b.date) {
+            return 0;
+          } else if (!a.date) {
+            return 1;
+          } else if(!b.date){
+            return -1;
+          } else {
+            return this.reverse ? new Date(a.date) - new Date(b.date) : new Date(b.date) - new Date(a.date);
+          }
         });
       } else {
         this.connections.sort((a, b) => {

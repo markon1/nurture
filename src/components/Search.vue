@@ -46,7 +46,7 @@
 <script>
 export default {
   name: "Search",
-  props: ["connectionsProp","apiURL"],
+  props: ["connectionsProp", "apiURL"],
   data: function() {
     return {
       sortKey: "value",
@@ -84,11 +84,17 @@ export default {
     sortBy: function(sortKey, dir) {
       this.reverse = dir;
       this.sortKey = sortKey;
-      if (sortKey == 'date') {
-		  this.connections.sort((a, b) => {
-          return this.reverse
-            ? new Date(b.date) - new Date(a.date)
-            : new Date(a.date) - new Date(b.date);
+      if (sortKey == "date") {
+        this.connections.sort((a, b) => {
+          if (!a.date && !b.date) {
+            return 0;
+          } else if (!a.date) {
+            return 1;
+          } else if(!b.date){
+            return -1;
+          } else {
+            return this.reverse ? new Date(a.date) - new Date(b.date) : new Date(b.date) - new Date(a.date);
+          }
         });
       } else {
         this.connections.sort((a, b) => {
@@ -103,16 +109,16 @@ export default {
 </script>
 
 <style>
-.row{
-  margin-bottom:15px;
+.row {
+  margin-bottom: 15px;
 }
 
 .searchHeading > div {
-  margin-bottom:10px;
+  margin-bottom: 10px;
   text-align: center;
 }
 
-.dateHead{
+.dateHead {
   text-align: left !important;
 }
 
@@ -122,7 +128,7 @@ export default {
   color: blueviolet;
 }
 
-select{
+select {
   border-radius: 4px;
   cursor: pointer;
 }
