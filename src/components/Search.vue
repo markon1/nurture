@@ -75,7 +75,7 @@ export default {
           (!self.dateFilter ||
             new Date(conn.date).toDateString() ==
               new Date(self.dateFilter).toDateString()) &&
-          (!self.valueFilter || conn.value == self.valueFilter)
+          (!self.valueFilter || conn.value >= self.valueFilter)
         );
       });
     }

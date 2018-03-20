@@ -78,7 +78,7 @@ export default {
           (!self.dateFilter ||
             new Date(conn.date).toDateString() ==
               new Date(self.dateFilter).toDateString()) &&
-          (!self.valueFilter || conn.value == self.valueFilter)
+          (!self.valueFilter || conn.value >= self.valueFilter)
         );
       });
     }
@@ -90,8 +90,8 @@ export default {
       if (sortKey == "date") {
         this.connections.sort((a, b) => {
           return this.reverse
-            ? new Date(a.date) - new Date(b.date)
-            : new Date(b.date) - new Date(a.date);
+            ? (!!a.date && !!b.date ? new Date(a.date) - new Date(b.date) : 1)
+            : (!!b.date && !!a.date ? new Date(b.date) - new Date(a.date) : 1) 
         });
       } else {
         this.connections.sort((a, b) => {

@@ -4,7 +4,7 @@
       <img :src='conn.info.profileImg' class='profileImg'>
     </div>
     <div v-bind:class="[ overdue ? 'col-lg-offset-0 col-lg-5 col-md-offset-0 col-md-7 col-sm-offset-0 col-sm-9 col-xs-offset-1 col-xs-24' : 'col-lg-offset-0 col-lg-5 col-md-offset-0 col-md-5 col-sm-offset-0 col-sm-9 col-xs-offset-1 col-xs-24','infoText']">
-      <a :href='conn.connURL'>{{conn.info.name}}</a>
+      <a :href='conn.connURL' target='_blank'>{{conn.info.name}}</a>
       <br>
       <p>{{conn.info.bio}}</p>
     </div>
