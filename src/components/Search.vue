@@ -93,7 +93,7 @@ export default {
           } else if(!b.date){
             return -1;
           } else {
-            return this.reverse ? new Date(a.date) - new Date(b.date) : new Date(b.date) - new Date(a.date);
+            return this.reverse ? new Date(b.date) - new Date(a.date) : new Date(a.date) - new Date(b.date);
           }
         });
       } else {
