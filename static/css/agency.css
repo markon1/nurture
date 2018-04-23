@@ -155,3 +155,12 @@ img::-moz-selection {
 #settings{
   padding:20px;
 }
+
+#snoozeAmount{
+  margin-left:10px;
+  margin-right:10px;
+}
+
+#emailInterval{
+  margin-left:10px;
+}
