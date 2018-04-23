@@ -66,12 +66,21 @@ export default {
 </script>
 
 <style>
+.connection,.headingWrapper{
+  width:100%;
+}
+
+.valueFilterSelect{
+  width:83px;
+  height:38px;
+}
+
 .connection > div {
   margin-bottom: 10px;
 }
 
 .date-picker {
-  width: 115px;
+  width: 128px;
 }
 
 .vue-star-rating {
@@ -129,6 +138,10 @@ textarea {
 
 .input-wrapper {
   border-radius: 4px !important;
+}
+
+.input-wrapper > .input{
+  line-height: 18px !important;
 }
 
 .vue-input-tag-wrapper {

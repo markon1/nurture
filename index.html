@@ -4,52 +4,99 @@
 <head>
   <meta charset=utf-8>
   <meta name=viewport content="width=device-width,initial-scale=1">
-  <title>Nurture</title>
-  <link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css integrity=sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u
+  <title>Nurtur3</title>
+  <link rel="shortcut icon" href=/static/images/favicon.ico type=image/x-icon>
+  <link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css integrity=sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm
     crossorigin=anonymous>
-  <link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css integrity=sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp
-    crossorigin=anonymous>
-  <script src=https://code.jquery.com/jquery-3.3.1.min.js></script>
-  <script src=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js integrity=sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa
-    crossorigin=anonymous></script>
-  <link rel=stylesheet href=/static/css/grid30.css>
-  <link href=/static/css/app.deafdf5c9aeca3c66847dfecf29a7f4e.css rel=stylesheet>
+  <link href=/static/vendor/font-awesome/css/font-awesome.min.css rel=stylesheet type=text/css>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel=stylesheet type=text/css>
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel=stylesheet type=text/css>
+  <link href=/static/css/grid30.css rel=stylesheet>
+  <link href=/static/css/agency.css rel=stylesheet>
+  <link href=/static/css/app.3a26c5b52aacce84331ab74a49bf67ba.css rel=stylesheet>
 </head>
 
-<body>
-  <div id=main role=tabpanel class="col-md-30 col-lg-30 col-sm-30 col-xs-30">
+<body id=page-top>
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id=mainNav>
+    <div class=container>
+      <a class=navbar-brand href=/>
+      <img src=/static/images/logo.png> </a>
+      <button class="navbar-toggler navbar-toggler-right" type=button data-toggle=collapse data-target=#navbarResponsive
+        aria-controls=navbarResponsive aria-expanded=false aria-label="Toggle navigation">Menu
+        <i class="fa fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id=navbarResponsive>
+        <ul class="navbar-nav text-uppercase ml-auto">
+          <li class=nav-item>
+            <a class=nav-link href=/faq>FAQ</a>
+          </li>
+          <li class=nav-item>
+            <a class=nav-link href=#>Blog</a>
+          </li>
+          <li class=nav-item>
+            <a class=nav-link href=/logout>Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div id=main class="col-md-30 col-lg-30 col-sm-30 col-xs-30">
     <ul class="nav nav-tabs" role=tablist>
-      <li role=presentation class=active>
-        <a href=#home aria-controls=home role=tab data-toggle=tab>Home</a>
+      <li class="nav-item active">
+        <a id=overdue-tab href=#overdue class="nav-item nav-link active" data-toggle=tab role=tab>Overdue</a>
       </li>
-      <li role=presentation>
-        <a href=#overdue aria-controls=overdue role=tab data-toggle=tab>Overdue</a>
+      <li class=nav-item>
+        <a id=search-tab href=#search class="nav-item nav-link" data-toggle=tab role=tab>Search</a>
       </li>
-      <li role=presentation>
-        <a href=#search aria-controls=search role=tab data-toggle=tab>Search</a>
-      </li>
-      <li role=presentation>
-        <a href=#faq aria-controls=faq role=tab data-toggle=tab>FAQ</a>
-      </li>
-      <li role=presentation>
-        <a href=#blog aria-controls=blog role=tab data-toggle=tab>Blog</a>
-      </li>
-      <li role=presentation>
-        <a href=#settings aria-controls=settings role=tab data-toggle=tab>Settings</a>
+      <li class=nav-item>
+        <a id=settings-tab href=#settings class="nav-item nav-link" data-toggle=tab role=tab>Settings</a>
       </li>
     </ul>
     <div class=tab-content>
-      <div role=tabpanel class="tab-pane active" id=home>Under Construction</div>
-      <div role=tabpanel class=tab-pane id=overdue></div>
-      <div role=tabpanel class=tab-pane id=search></div>
-      <div role=tabpanel class=tab-pane id=faq>Under Construction</div>
-      <div role=tabpanel class=tab-pane id=blog>Under Construction</div>
-      <div role=tabpanel class=tab-pane id=settings>Under Construction</div>
+      <div role=tabpanel class="tab-pane show active" id=overdue></div>
+      <div role=tabpanel class="tab-pane fade" id=search></div>
+      <div role=tabpanel class="tab-pane fade" id=settings>
+        <div class=form-inline>Snooze
+          <select id=snoozeAmount class=form-control>
+            <option value=1>1</option>
+            <option value=2>2</option>
+            <option value=3>3</option>
+            <option value=4>4</option>
+            <option value=5>5</option>
+            <option value=6>6</option>
+            <option value=7>7</option>
+            <option value=8>8</option>
+            <option value=9>9</option>
+            <option value=10>10</option>
+          </select>
+          <select id=snoozeInterval class=form-control>
+            <option value=days>Days</option>
+            <option value=weeks>Weeks</option>
+            <option value=months>Months</option>
+          </select>
+        </div>
+        <div class=form-inline>Email every
+          <select id=emailInterval class=form-control>
+            <option value=1>1 week</option>
+            <option value=2>2 weeks</option>
+            <option value=3>3 weeks</option>
+            <option value=4>4 weeks</option>
+          </select>
+        </div>
+        <a href=#>Donate</a>
+        <br>
+        <a href=#>Contact us</a>
+      </div>
     </div>
   </div>
+  <script src=/static/vendor/jquery/jquery.min.js></script>
+  <script src=https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js integrity=sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl
+    crossorigin=anonymous></script>
+  <script src=/static/vendor/jquery-easing/jquery.easing.min.js></script>
+  <script src=/static/js/agency.js></script>
   <script type=text/javascript src=/static/js/manifest.2ae2e69a05c33dfc65f8.js></script>
   <script type=text/javascript src=/static/js/vendor.12a499663eddb5ec8592.js></script>
-  <script type=text/javascript src=/static/js/app.e205edbba80e157b5852.js></script>
+  <script type=text/javascript src=/static/js/app.e2691119ccd6a5c693d6.js></script>
 </body>
 
 </html>

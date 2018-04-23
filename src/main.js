@@ -17,8 +17,8 @@ Vue.component('InputTag', InputTag)
 
 Vue.config.productionTip = false
 
-const apiURL = 'https://nurtur3.herokuapp.com/connections/'
-var connections = []
+const apiURL = 'https://nurtur3.herokuapp.com/connections/';
+var connections = [];
 
 function getConnections () {
   $.get(apiURL).done(function (data) {
@@ -48,6 +48,8 @@ function getConnections () {
       },
       template: `<Overdue :connectionsProp='connections' :apiURL='apiURL'/>`
     })
+
+    $("#overdue").addClass('active');
   }).fail(function () {
     getConnections()
   })
