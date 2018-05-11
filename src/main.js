@@ -17,8 +17,15 @@ Vue.component('InputTag', InputTag)
 
 Vue.config.productionTip = false
 
-const apiURL = 'https://nurtur3.herokuapp.com/connections/';
+const apiURL = '/connections/';
 var connections = [];
+
+$('.tablink').on('click',function(e){
+  e.preventDefault();
+  let tabId = $(this).attr('data-id');
+  $('.tab-pane.show, .tab-pane.active').removeClass('show active');
+  $('#'+ tabId).addClass('show active');
+})
 
 function getConnections () {
   $.get(apiURL).done(function (data) {

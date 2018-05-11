@@ -3,13 +3,15 @@
         <h2>Overdue</h2>
         <div class='row searchHeading'>
             <div class='headingWrapper'>
-              <div class='col-lg-offset-1 col-lg-2 col-md-offset-1 col-md-2 col-sm-offset-0 col-sm-0 col-xs-offset-0 col-xs-0'></div>
-              <div class='col-lg-offset-0 col-lg-5 col-md-offset-0 col-md-5 col-sm-offset-0 col-sm-0 col-xs-offset-0 col-xs-0'></div>
-              <div class='col-lg-offset-0 col-lg-5 col-md-offset-0 col-md-6 col-sm-offset-1 col-sm-11 col-xs-offset-1 col-xs-8'>
+              <div class='col-lg-offset-3 col-lg-5 col-md-offset-1 col-md-6 col-sm-offset-1 col-sm-14 col-xs-offset-1 col-xs-14'>
+                  Name/title
+                  <input v-model='nameTitleFilter' class="form-control" placeholder="filter names/titles">
+              </div>
+              <div class='col-lg-offset-0 col-lg-5 col-md-offset-0 col-md-6 col-sm-offset-0 col-sm-14 col-xs-offset-0 col-xs-14'>
                   Notes
                   <input v-model='notesFilter' class="form-control" placeholder="filter notes">
               </div>            
-              <div class='col-lg-offset-0 col-lg-4 col-md-offset-0 col-md-5 col-sm-offset-0 col-sm-4 col-xs-offset-0 col-xs-7'>
+              <div class='col-lg-offset-0 col-lg-4 col-md-offset-0 col-md-4 col-sm-offset-1 col-sm-5 col-xs-offset-1 col-xs-6'>
                   Value
                   <a href="#" @click="sortBy('value',false)" v-bind:class="{activeSort: sortKey == 'value' && reverse == false}">&#9650;</a>
                   <a href="#" @click="sortBy('value',true)" v-bind:class="{activeSort: sortKey == 'value' && reverse == true}">&#9660;</a>
@@ -23,16 +25,16 @@
                     <option value=5>5</option>
                   </select>
                   </div>
-              <div class='col-lg-offset-0 col-lg-3 col-md-offset-0 col-md-4 col-sm-offset-0 col-sm-4 col-xs-offset-0 col-xs-6 dateHead'>
+              <div class='col-lg-offset-0 col-lg-3 col-md-offset-0 col-md-4 col-sm-offset-0 col-sm-4 col-xs-offset-1 col-xs-6 dateHead'>
                   Date
                   <a href="#" @click="sortBy('date',false)" v-bind:class="{activeSort: sortKey == 'date' && reverse == false}">&#9650;</a>
                   <a href="#" @click="sortBy('date',true)" v-bind:class="{activeSort: sortKey == 'date' && reverse == true}">&#9660;</a>                
               </div>            
-              <div class='col-lg-offset-0 col-lg-5 col-md-offset-0 col-md-6 col-sm-offset-0 col-sm-9 col-xs-offset-0 col-xs-7'>
+              <div class='col-lg-offset-0 col-lg-5 col-md-offset-0 col-md-8 col-sm-offset-0 col-sm-19 col-xs-offset-1 col-xs-14'>
                   Tags
                   <input v-model="tagsFilter" class="form-control" placeholder="filter tags">
               </div>
-              <div class='col-lg-offset-0 col-lg-4 col-md-offset-0 col-md-5 col-sm-offset-0 col-sm-0 col-xs-offset-0 col-xs-0 hidden-md hidden-sm hidden-xs'>
+              <div class='col-lg-offset-0 col-lg-4 hidden-md hidden-sm hidden-xs'>
                   Actions
               </div>
             </div>
@@ -55,6 +57,7 @@ export default {
     return {
       sortKey: "value",
       reverse: false,
+      nameTitleFilter:"",
       notesFilter: "",
       tagsFilter: "",
       dateFilter: "",
@@ -69,6 +72,13 @@ export default {
       return this.connections.filter(conn => {
         return (
           new Date(conn.date) < new Date() &&
+          (!self.nameTitleFilter ||
+            conn.info.name
+              .toLowerCase()
+              .includes(self.nameTitleFilter.toLowerCase()) ||
+            conn.info.bio
+              .toLowerCase()
+              .includes(self.nameTitleFilter.toLowerCase())) &&
           (!self.notesFilter ||
             conn.notes
               .toLowerCase()
