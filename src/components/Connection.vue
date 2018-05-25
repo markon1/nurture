@@ -56,8 +56,15 @@ export default {
       this.patch("date");
     },
     snooze: function() {
+      let snoozeAmount = parseInt($("#snoozeAmount").val());
+      let snoozeInterval = $("#snoozeInterval").val();
+      if(snoozeInterval == 'weeks'){
+        snoozeAmount = snoozeAmount * 7;
+      } else if(snoozeInterval == 'months'){
+        snoozeAmount = snoozeAmount * 30;
+      }
       this.conn.date = convertDate(
-        new Date(Date.now() + 3 * 24 * 60 * 60 * 1000)
+        new Date(Date.now() + snoozeAmount * 24 * 60 * 60 * 1000)
       );
       this.patch("date");
     }
