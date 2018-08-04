@@ -63,6 +63,11 @@ function getConnections() {
       } else {
         $("#search").addClass("active");
       }
+
+      // when tab changes update hash
+      $(".tablink").on("click", function() {
+        window.location.hash = "#" + $(this).attr("data-id");
+      });
     })
     .fail(function() {
       getConnections();

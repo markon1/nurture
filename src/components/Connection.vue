@@ -167,6 +167,11 @@ textarea {
 
 .doneBtn {
 	margin-right: 4px;
+	color: #ffffff;
 	background-color: #24c602;
+}
+
+.doneBtn:hover {
+	background-color: #1e8f08;
 }
 </style>
