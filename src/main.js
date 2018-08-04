@@ -60,13 +60,21 @@ function getConnections() {
       // set active tab based on hash
       if (!!window.location.hash) {
         $("#" + window.location.hash.substr(1)).addClass("active");
+        $(`.tab-link[data-id="${window.location.hash.substr(1)}"]`).css("color", "#fed136");
       } else {
         $("#search").addClass("active");
+        $(`.tab-link[data-id="search"]`).css("color", "#fed136");
       }
 
       // when tab changes update hash
       $(".tablink").on("click", function() {
         window.location.hash = "#" + $(this).attr("data-id");
+      });
+
+      // when nav-link is clicked change color of it and other nav-links
+      $(".nav-link").on("click", function() {
+        $(".nav-link").css("color", "#000000");
+        $(this).css("color", "#fed136");
       });
     })
     .fail(function() {
