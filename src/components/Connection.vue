@@ -15,13 +15,13 @@
       <star-rating v-model='conn.value' :star-size='25' :show-rating='false' @rating-selected="patch('value')"></star-rating>
     </div>
     <div v-bind:class="[ overdue ? 'col-lg-offset-0 col-lg-3 col-md-offset-0 col-md-4 col-sm-offset-1 col-sm-5 col-xs-offset-0 col-xs-7' : 'col-lg-offset-0 col-lg-3 col-md-offset-0 col-md-4 col-sm-offset-0 col-sm-6 col-xs-offset-0 col-xs-7','dueDate']">
-      <datepicker v-model='conn.date' input-class='form-control dateInput' @input="patch('date')"></datepicker>
+      <datepicker v-model='conn.date' input-class='form-control dateInput'></datepicker>
     </div>
     <div v-bind:class="[ overdue ? 'col-lg-offset-0 col-lg-5 col-md-offset-0 col-md-14 col-sm-offset-0 col-sm-10 col-xs-offset-1 col-xs-28' : 'col-lg-offset-0 col-lg-7 col-md-offset-0 col-md-6 col-sm-offset-0 col-sm-16 col-xs-offset-1 col-xs-28','tags']">
       <input-tag :tags.sync='conn.tags' @update:tags="patch('tags')"></input-tag>
     </div>
 	<div class='actions col-lg-offset-0 col-lg-4 col-md-offset-0 col-md-5 col-sm-offset-0 col-sm-6 col-xs-offset-1 col-xs-28' v-if="overdue">
-      <button class="btn btn-danger closeBtn" @click="close">Close</button><button class="btn btn-warning snoozeBtn" @click="snooze">Snooze</button>
+      <button class="btn doneBtn" @click="done">Done</button><button class="btn btn-warning snoozeBtn" @click="snooze">Snooze</button>
     </div>
   </div>
 </template>
@@ -29,137 +29,144 @@
 <script>
 // converts date to YYYYMMDD format
 function convertDate(dt) {
-  let d = new Date(dt);
-  return d.toISOString().slice(0, 10);
+	let d = new Date(dt);
+	return d.toISOString().slice(0, 10);
 }
 
 export default {
-  name: "Connection",
-  props: ["connProp", "overdue", "apiURL"],
-  data: function() {
-    return {
-      conn: this.connProp
-    };
-  },
-  methods: {
-    patch: function(field) {
-      $.ajax({
-        url: this.apiURL + this.conn._id,
-        data: JSON.stringify({ [field]: this.conn[field] }),
-        type: "PATCH",
-        contentType: "application/json",
-        dataType: "json"
-      });
-    },
-    close: function() {
-      this.conn.date = "";
-      this.patch("date");
-    },
-    snooze: function() {
-      let snoozeAmount = parseInt($("#snoozeAmount").val());
-      let snoozeInterval = $("#snoozeInterval").val();
-      if(snoozeInterval == 'weeks'){
-        snoozeAmount = snoozeAmount * 7;
-      } else if(snoozeInterval == 'months'){
-        snoozeAmount = snoozeAmount * 30;
-      }
-      this.conn.date = convertDate(
-        new Date(Date.now() + snoozeAmount * 24 * 60 * 60 * 1000)
-      );
-      this.patch("date");
-    }
-  }
+	name: "Connection",
+	props: ["connProp", "overdue", "apiURL"],
+	data: function() {
+		return {
+			conn: this.connProp
+		};
+	},
+	methods: {
+		patch: function(field) {
+			$.ajax({
+				url: this.apiURL + this.conn._id,
+				data: JSON.stringify({ [field]: this.conn[field] }),
+				type: "PATCH",
+				contentType: "application/json",
+				dataType: "json"
+			});
+		},
+		done: function() {
+			this.conn.date = "";
+			this.patch("date");
+		},
+		snooze: function() {
+			let snoozeAmount = parseInt($("#snoozeAmount").val());
+			let snoozeInterval = $("#snoozeInterval").val();
+			if (snoozeInterval == "weeks") {
+				snoozeAmount = snoozeAmount * 7;
+			} else if (snoozeInterval == "months") {
+				snoozeAmount = snoozeAmount * 30;
+			}
+			this.conn.date = convertDate(new Date(Date.now() + snoozeAmount * 24 * 60 * 60 * 1000));
+			this.patch("date");
+		}
+	},
+	watch: {
+		"conn.date": function(nw, old) {
+			this.patch("date");
+		}
+	}
 };
 </script>
 
 <style>
-.connection,.headingWrapper{
-  width:100%;
+.connection,
+.headingWrapper {
+	width: 100%;
 }
 
-.valueFilterSelect{
-  width:83px;
-  height:38px;
+.valueFilterSelect {
+	width: 83px;
+	height: 38px;
 }
 
 .connection > div {
-  margin-bottom: 10px;
+	margin-bottom: 10px;
 }
 
 .date-picker {
-  width: 128px;
+	width: 128px;
 }
 
 .vue-star-rating {
-  text-align: center;
-  display: block !important;
+	text-align: center;
+	display: block !important;
 }
 
 .actions {
-  text-align: center;
+	text-align: center;
 }
 
 @media (max-width: 767px) {
-  .vue-star-rating > .vue-star-rating, .dueDate, .actions {
-    text-align: left;
-  }
+	.vue-star-rating > .vue-star-rating,
+	.dueDate,
+	.actions {
+		text-align: left;
+	}
 }
 
 .profileImg {
-  width: 80px;
-  border-radius: 80px;
+	width: 80px;
+	border-radius: 80px;
 }
 
 .infoText {
-  padding-left: 32px;
-  min-height: 80px;
-  max-height: 120px;
-  overflow-y: auto;
+	padding-left: 32px;
+	min-height: 80px;
+	max-height: 120px;
+	overflow-y: auto;
 }
 
 textarea {
-  resize: none;
-  width: 100%;
-  height: 120px;
-  background-color: transparent;
-  border: 1px solid rgb(204, 204, 204);
-  border-radius: 4px !important;
+	resize: none;
+	width: 100%;
+	height: 120px;
+	background-color: transparent;
+	border: 1px solid rgb(204, 204, 204);
+	border-radius: 4px !important;
 }
 
 ::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  border-radius: 10px;
-  background-color: #f5f5f5;
+	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+	border-radius: 10px;
+	background-color: #f5f5f5;
 }
 
 ::-webkit-scrollbar {
-  width: 10px;
-  background-color: #f5f5f5;
+	width: 10px;
+	background-color: #f5f5f5;
 }
 
 ::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  background-color: #555;
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+	background-color: #555;
 }
 
 .input-wrapper {
-  border-radius: 4px !important;
+	border-radius: 4px !important;
 }
 
-.input-wrapper > .input{
-  line-height: 18px !important;
+.input-wrapper > .input {
+	line-height: 18px !important;
 }
 
 .vue-input-tag-wrapper {
-  border-radius: 4px !important;
+	border-radius: 4px !important;
 }
 
 .actions > button {
-  display: inline-block;
+	display: inline-block;
 }
 
-.closeBtn {
-  margin-right: 4px;
+.doneBtn {
+	margin-right: 4px;
+	background-color: #24c602;
 }
 </style>

@@ -1,6 +1,5 @@
 <template>
     <div role="tabpanel" class="tab-pane" id="search">
-        <h2>Search</h2>
         <div class='row searchHeading'>
             <div class='headingWrapper'>
               <div class='col-lg-offset-3 col-lg-5 col-md-offset-1 col-md-6 col-sm-offset-1 col-sm-14 col-xs-offset-1 col-xs-14'>
@@ -49,102 +48,86 @@
 
 <script>
 export default {
-  name: "Search",
-  props: ["connectionsProp", "apiURL"],
-  data: function() {
-    return {
-      sortKey: "value",
-      reverse: false,
-      nameTitleFilter:"",
-      notesFilter: "",
-      tagsFilter: "",
-      dateFilter: "",
-      valueFilter: "",
-      columns: ["notes", "date", "value", "tags"],
-      connections: this.connectionsProp
-    };
-  },
-  computed: {
-    filteredConnections: function() {
-      var self = this;
-      return this.connections.filter(conn => {
-        return (
-          (!self.nameTitleFilter ||
-            conn.info.name
-              .toLowerCase()
-              .includes(self.nameTitleFilter.toLowerCase()) ||
-            conn.info.bio
-              .toLowerCase()
-              .includes(self.nameTitleFilter.toLowerCase())) &&
-          (!self.notesFilter ||
-            conn.notes
-              .toLowerCase()
-              .includes(self.notesFilter.toLowerCase())) &&
-          (!self.tagsFilter ||
-            conn.tags.find(t =>
-              t.toLowerCase().includes(self.tagsFilter.toLowerCase())
-            )) &&
-          (!self.dateFilter ||
-            new Date(conn.date).toDateString() ==
-              new Date(self.dateFilter).toDateString()) &&
-          (!self.valueFilter || conn.value >= self.valueFilter)
-        );
-      });
-    }
-  },
-  methods: {
-    sortBy: function(sortKey, dir) {
-      this.reverse = dir;
-      this.sortKey = sortKey;
-      if (sortKey == "date") {
-        this.connections.sort((a, b) => {
-          if (!a.date && !b.date) {
-            return 0;
-          } else if (!a.date) {
-            return 1;
-          } else if(!b.date){
-            return -1;
-          } else {
-            return this.reverse ? new Date(b.date) - new Date(a.date) : new Date(a.date) - new Date(b.date);
-          }
-        });
-      } else {
-        this.connections.sort((a, b) => {
-          return this.reverse
-            ? b[this.sortKey] - a[this.sortKey]
-            : a[this.sortKey] - b[this.sortKey];
-        });
-      }
-    }
-  }
+	name: "Search",
+	props: ["connectionsProp", "apiURL"],
+	data: function() {
+		return {
+			sortKey: "value",
+			reverse: false,
+			nameTitleFilter: "",
+			notesFilter: "",
+			tagsFilter: "",
+			dateFilter: "",
+			valueFilter: "",
+			columns: ["notes", "date", "value", "tags"],
+			connections: this.connectionsProp
+		};
+	},
+	computed: {
+		filteredConnections: function() {
+			var self = this;
+			return this.connections.filter(conn => {
+				return (
+					(!self.nameTitleFilter || conn.info.name.toLowerCase().includes(self.nameTitleFilter.toLowerCase()) || conn.info.bio.toLowerCase().includes(self.nameTitleFilter.toLowerCase())) &&
+					(!self.notesFilter || conn.notes.toLowerCase().includes(self.notesFilter.toLowerCase())) &&
+					(!self.tagsFilter || conn.tags.find(t => t.toLowerCase().includes(self.tagsFilter.toLowerCase()))) &&
+					(!self.dateFilter || new Date(conn.date).toDateString() == new Date(self.dateFilter).toDateString()) &&
+					(!self.valueFilter || conn.value >= self.valueFilter)
+				);
+			});
+		}
+	},
+	methods: {
+		sortBy: function(sortKey, dir) {
+			this.reverse = dir;
+			this.sortKey = sortKey;
+			if (sortKey == "date") {
+				this.connections.sort((a, b) => {
+					if (!a.date && !b.date) {
+						return 0;
+					} else if (!a.date) {
+						return 1;
+					} else if (!b.date) {
+						return -1;
+					} else {
+						return this.reverse ? new Date(b.date) - new Date(a.date) : new Date(a.date) - new Date(b.date);
+					}
+				});
+			} else {
+				this.connections.sort((a, b) => {
+					return this.reverse ? b[this.sortKey] - a[this.sortKey] : a[this.sortKey] - b[this.sortKey];
+				});
+			}
+		}
+	}
 };
 </script>
 
 <style>
 .row {
-  margin-bottom: 15px;
+	margin-bottom: 15px;
 }
 
 .searchHeading > .headingWrapper {
-  margin-bottom: 10px;
+	margin-bottom: 10px;
 }
 
-.headingWrapper{
-  margin-bottom: 10px;
+.headingWrapper {
+	margin-bottom: 10px;
 }
 
 .dateHead {
-  text-align: left !important;
+	text-align: left !important;
 }
 
 .activeSort,
 .activeSort:active,
 .activeSort:visited {
-  color: blueviolet;
+	color: blueviolet;
 }
 
 select {
-  border-radius: 4px;
-  cursor: pointer;
+	border-radius: 4px;
+	cursor: pointer;
 }
 </style>
