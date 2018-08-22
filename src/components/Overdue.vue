@@ -1,40 +1,24 @@
 <template>
     <div role="tabpanel" class="tab-pane" id="overdue">
+		<div class='row' id='overdueHeaderImg'>
+			<span>OV</span><span class='greenUnderlined'>ERD</span><span>UE</span>
+		</div>
         <div class='row searchHeading'>
             <div class='headingWrapper'>
-              <div class='col-lg-offset-3 col-lg-5 col-md-offset-1 col-md-6 col-sm-offset-1 col-sm-14 col-xs-offset-1 col-xs-14'>
-                  Name/title
-                  <input v-model='nameTitleFilter' class="form-control" placeholder="filter names/titles">
+              <div class='col-lg-offset-3 col-lg-5 col-md-offset-1 col-md-6 col-sm-offset-1 col-sm-14 col-xs-offset-1 col-xs-14'>                  
+                  <input v-model='nameTitleFilter' class="form-control" placeholder="Name/Title (type to filter)">
               </div>
               <div class='col-lg-offset-0 col-lg-5 col-md-offset-0 col-md-6 col-sm-offset-0 col-sm-14 col-xs-offset-0 col-xs-14'>
-                  Notes
-                  <input v-model='notesFilter' class="form-control" placeholder="filter notes">
-              </div>            
+                  <input v-model='notesFilter' class="form-control" placeholder="Notes (type to filter)">
+              </div>  
+			  <div class='col-lg-offset-0 col-lg-5 col-md-offset-0 col-md-8 col-sm-offset-0 col-sm-19 col-xs-offset-1 col-xs-14'>
+                  <input v-model="tagsFilter" class="form-control" placeholder="Tags (type to filter)">
+              </div>          
               <div class='col-lg-offset-0 col-lg-4 col-md-offset-0 col-md-4 col-sm-offset-1 col-sm-5 col-xs-offset-1 col-xs-6'>
-                  Value
-                  <a href="#" @click="sortBy('value',false)" v-bind:class="{activeSort: sortKey == 'value' && reverse == false}">&#9650;</a>
-                  <a href="#" @click="sortBy('value',true)" v-bind:class="{activeSort: sortKey == 'value' && reverse == true}">&#9660;</a>
-                  <br>
-                  <select v-model='valueFilter' class='valueFilterSelect'>
-                    <option value="">Value</option>
-                    <option value=1>1</option>
-                    <option value=2>2</option>
-                    <option value=3>3</option>
-                    <option value=4>4</option>
-                    <option value=5>5</option>
-                  </select>
-                  </div>
-              <div class='col-lg-offset-0 col-lg-3 col-md-offset-0 col-md-4 col-sm-offset-0 col-sm-4 col-xs-offset-1 col-xs-6 dateHead'>
-                  Date
-                  <a href="#" @click="sortBy('date',false)" v-bind:class="{activeSort: sortKey == 'date' && reverse == false}">&#9650;</a>
-                  <a href="#" @click="sortBy('date',true)" v-bind:class="{activeSort: sortKey == 'date' && reverse == true}">&#9660;</a>                
-              </div>            
-              <div class='col-lg-offset-0 col-lg-5 col-md-offset-0 col-md-8 col-sm-offset-0 col-sm-19 col-xs-offset-1 col-xs-14'>
-                  Tags
-                  <input v-model="tagsFilter" class="form-control" placeholder="filter tags">
+				  <button @click="sortBy('value',!reverse)" class='form-control'>Value <i v-bind:class="[sortKey == 'value' && !reverse ? 'fa-angle-down':'fa-angle-up','fas sortBtn']"></i></button>                                  
               </div>
-              <div class='col-lg-offset-0 col-lg-4 hidden-md hidden-sm hidden-xs'>
-                  Actions
+              <div class='col-lg-offset-0 col-lg-3 col-md-offset-0 col-md-4 col-sm-offset-0 col-sm-4 col-xs-offset-1 col-xs-6 dateHead'>
+                  <button @click="sortBy('date',!reverse)" class='form-control'>Date <i v-bind:class="[sortKey == 'date' && !reverse ? 'fa-angle-down':'fa-angle-up','fas sortBtn']"></i></button>                                  
               </div>
             </div>
         </div>
@@ -60,8 +44,6 @@ export default {
 			notesFilter: "",
 			tagsFilter: "",
 			dateFilter: "",
-			valueFilter: "",
-			columns: ["notes", "date", "value", "tags"],
 			connections: this.connectionsProp
 		};
 	},
@@ -74,8 +56,7 @@ export default {
 					(!self.nameTitleFilter || conn.info.name.toLowerCase().includes(self.nameTitleFilter.toLowerCase()) || conn.info.bio.toLowerCase().includes(self.nameTitleFilter.toLowerCase())) &&
 					(!self.notesFilter || conn.notes.toLowerCase().includes(self.notesFilter.toLowerCase())) &&
 					(!self.tagsFilter || conn.tags.find(t => t.toLowerCase().includes(self.tagsFilter.toLowerCase()))) &&
-					(!self.dateFilter || new Date(conn.date).toDateString() == new Date(self.dateFilter).toDateString()) &&
-					(!self.valueFilter || conn.value >= self.valueFilter)
+					(!self.dateFilter || new Date(conn.date).toDateString() == new Date(self.dateFilter).toDateString())
 				);
 			});
 		}
@@ -106,16 +87,31 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .row {
 	margin-bottom: 15px;
 	padding-bottom: 15px;
 	border-bottom: 1px solid black;
 }
 
-.activeSort,
-.activeSort:active,
-.activeSort:visited {
-	color: blueviolet;
+.sortBtn {
+	color: #ffc107;
+}
+
+#overdueHeaderImg {
+	background-color: #000000;
+	background-image: url("/static/images/overdueHeader.png");
+	opacity: 0.3;
+	color: #ffffff;
+	font-family: "Arial Black", "Arial Bold", Gadget, sans-serif;
+	font-size: 45px;
+	text-align: center;
+	height: 15%;
+	vertical-align: middle;
+}
+
+.greenUnderlined {
+	text-decoration: underline;
+	text-decoration-color: #24c602;
 }
 </style>

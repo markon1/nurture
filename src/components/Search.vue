@@ -1,39 +1,25 @@
 <template>
     <div role="tabpanel" class="tab-pane" id="search">
+		<div class='row' id='searchHeaderImg'>
+			<span>S</span><span class='greenUnderlined'>EARC</span><span>H</span>
+		</div>
         <div class='row searchHeading'>
             <div class='headingWrapper'>
               <div class='col-lg-offset-3 col-lg-5 col-md-offset-1 col-md-6 col-sm-offset-1 col-sm-14 col-xs-offset-1 col-xs-14'>
-                  Name/title
-                  <input v-model='nameTitleFilter' class="form-control" placeholder="filter names/titles">
+                  <input v-model='nameTitleFilter' class="form-control" placeholder="Name/Title (type to filter)">
               </div>
               <div class='col-lg-offset-0 col-lg-7 col-md-offset-0 col-md-6 col-sm-offset-0 col-sm-14 col-xs-offset-0 col-xs-14'>
-                  Notes
-                  <input v-model='notesFilter' class="form-control" placeholder="filter notes">
-              </div>            
-              <div class='col-lg-offset-0 col-lg-4 col-md-offset-0 col-md-5 col-sm-offset-1 col-sm-6 col-xs-offset-1 col-xs-6'>
-                  Value
-                  <a href="#" @click="sortBy('value',false)" v-bind:class="{activeSort: sortKey == 'value' && reverse == false}">&#9650;</a>
-                  <a href="#" @click="sortBy('value',true)" v-bind:class="{activeSort: sortKey == 'value' && reverse == true}">&#9660;</a>
-                  <br>
-                  <select v-model='valueFilter' class='valueFilterSelect'>
-                    <option value="">Value</option>
-                    <option value=1>1</option>
-                    <option value=2>2</option>
-                    <option value=3>3</option>
-                    <option value=4>4</option>
-                    <option value=5>5</option>
-                  </select>                
+                  <input v-model='notesFilter' class="form-control" placeholder="Notes (type to filter)">
+              </div>  
+			  <div class='col-lg-offset-0 col-lg-7 col-md-offset-0 col-md-7 col-sm-offset-1 col-sm-14 col-xs-offset-1 col-xs-14'>
+                  <input v-model="tagsFilter" class="form-control" placeholder="Tags (type to filter)">
+              </div>    
+			  <div class='col-lg-offset-0 col-lg-4 col-md-offset-0 col-md-5 col-sm-offset-1 col-sm-6 col-xs-offset-1 col-xs-6'>
+				  <button @click="sortBy('value',!reverse)" class='form-control'>Value <i v-bind:class="[sortKey == 'value' && !reverse ? 'fa-angle-down':'fa-angle-up','fas sortBtn']"></i></button>                                  
               </div>
               <div class='col-lg-offset-0 col-lg-3 col-md-offset-0 col-md-4 col-sm-offset-1 col-sm-6 col-xs-offset-1 col-xs-6 dateHead'>
-                  Date
-                  <!--<datepicker v-model='dateFilter' format='MM-dd-yyyy' :clear-button='true' input-class='form-control dateInput'></datepicker>-->
-                  <a href="#" @click="sortBy('date',false)" v-bind:class="{activeSort: sortKey == 'date' && reverse == false}">&#9650;</a>
-                  <a href="#" @click="sortBy('date',true)" v-bind:class="{activeSort: sortKey == 'date' && reverse == true}">&#9660;</a>                
-              </div>
-              <div class='col-lg-offset-0 col-lg-7 col-md-offset-0 col-md-7 col-sm-offset-1 col-sm-14 col-xs-offset-1 col-xs-14'>
-                  Tags
-                  <input v-model="tagsFilter" class="form-control" placeholder="filter tags">
-              </div>
+                  <button @click="sortBy('date',!reverse)" class='form-control'>Date <i v-bind:class="[sortKey == 'date' && !reverse ? 'fa-angle-down':'fa-angle-up','fas sortBtn']"></i></button>                                  
+              </div>         
             </div>
         </div>
         <br>
@@ -59,7 +45,6 @@ export default {
 			tagsFilter: "",
 			dateFilter: "",
 			valueFilter: "",
-			columns: ["notes", "date", "value", "tags"],
 			connections: this.connectionsProp
 		};
 	},
@@ -103,7 +88,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .row {
 	margin-bottom: 15px;
 }
@@ -114,20 +99,31 @@ export default {
 
 .headingWrapper {
 	margin-bottom: 10px;
+	font-family: "Gotham";
 }
 
 .dateHead {
 	text-align: left !important;
 }
 
-.activeSort,
-.activeSort:active,
-.activeSort:visited {
-	color: blueviolet;
+.sortBtn {
+	color: #ffc107;
 }
 
-select {
-	border-radius: 4px;
-	cursor: pointer;
+#searchHeaderImg {
+	background-color: #000000;
+	background-image: url("/static/images/searchHeader.png");
+	opacity: 0.3;
+	color: #ffffff;
+	font-family: "Arial Black", "Arial Bold", Gadget, sans-serif;
+	font-size: 45px;
+	text-align: center;
+	height: 15%;
+	vertical-align: middle;
+}
+
+.greenUnderlined {
+	text-decoration: underline;
+	text-decoration-color: #24c602;
 }
 </style>

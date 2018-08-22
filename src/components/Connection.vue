@@ -11,15 +11,15 @@
     <div v-bind:class="[ overdue ? 'col-lg-offset-0 col-lg-5 col-md-offset-0 col-md-19 col-sm-offset-0 col-sm-16 col-xs-offset-1 col-xs-28' : 'col-lg-offset-0 col-lg-7 col-md-offset-0 col-md-6 col-sm-offset-0 col-sm-16 col-xs-offset-1 col-xs-28','notes']">
       <textarea v-model.lazy='conn.notes' @change="patch('notes')" placeholder="Notes"></textarea>
     </div>
+	<div v-bind:class="[ overdue ? 'col-lg-offset-0 col-lg-5 col-md-offset-0 col-md-14 col-sm-offset-0 col-sm-10 col-xs-offset-1 col-xs-28' : 'col-lg-offset-0 col-lg-7 col-md-offset-0 col-md-6 col-sm-offset-0 col-sm-16 col-xs-offset-1 col-xs-28','tags']">
+      <input-tag :tags.sync='conn.tags' @update:tags="patch('tags')"></input-tag>
+    </div>
 	<div v-bind:class="[ overdue ? 'col-lg-offset-0 col-lg-4 col-md-offset-1 col-md-5 col-sm-offset-1 col-sm-6 col-xs-offset-1 col-xs-10' : 'col-lg-offset-0 col-lg-4 col-md-offset-0 col-md-5 col-sm-offset-1 col-sm-6 col-xs-offset-1 col-xs-10','value']">
       <star-rating v-model='conn.value' :star-size='25' :show-rating='false' @rating-selected="patch('value')"></star-rating>
     </div>
     <div v-bind:class="[ overdue ? 'col-lg-offset-0 col-lg-3 col-md-offset-0 col-md-4 col-sm-offset-1 col-sm-5 col-xs-offset-0 col-xs-7' : 'col-lg-offset-0 col-lg-3 col-md-offset-0 col-md-4 col-sm-offset-0 col-sm-6 col-xs-offset-0 col-xs-7','dueDate']">
       <datepicker v-model='conn.date' input-class='form-control dateInput'></datepicker>
-    </div>
-    <div v-bind:class="[ overdue ? 'col-lg-offset-0 col-lg-5 col-md-offset-0 col-md-14 col-sm-offset-0 col-sm-10 col-xs-offset-1 col-xs-28' : 'col-lg-offset-0 col-lg-7 col-md-offset-0 col-md-6 col-sm-offset-0 col-sm-16 col-xs-offset-1 col-xs-28','tags']">
-      <input-tag :tags.sync='conn.tags' @update:tags="patch('tags')"></input-tag>
-    </div>
+    </div>    
 	<div class='actions col-lg-offset-0 col-lg-4 col-md-offset-0 col-md-5 col-sm-offset-0 col-sm-6 col-xs-offset-1 col-xs-28' v-if="overdue">
       <button class="btn doneBtn" @click="done">Done</button><button class="btn btn-warning snoozeBtn" @click="snooze">Snooze</button>
     </div>
@@ -75,7 +75,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .connection,
 .headingWrapper {
 	width: 100%;
