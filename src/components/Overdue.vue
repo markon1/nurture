@@ -5,19 +5,19 @@
 		</div>
         <div class='row searchHeading'>
             <div class='headingWrapper'>
-              <div class='col-lg-offset-3 col-lg-5 col-md-offset-1 col-md-6 col-sm-offset-1 col-sm-14 col-xs-offset-1 col-xs-14'>                  
+              <div class='offset-lg-3 col-lg-5 offset-md-1 col-md-6 offset-sm-1 col-sm-14 offset-xs-1 col-xs-14'>                  
                   <input v-model='nameTitleFilter' class="form-control" placeholder="Name/Title (type to filter)">
               </div>
-              <div class='col-lg-offset-0 col-lg-5 col-md-offset-0 col-md-6 col-sm-offset-0 col-sm-14 col-xs-offset-0 col-xs-14'>
+              <div class='offset-lg-0 col-lg-5 offset-md-0 col-md-6 offset-sm-0 col-sm-14 offset-xs-0 col-xs-14'>
                   <input v-model='notesFilter' class="form-control" placeholder="Notes (type to filter)">
               </div>  
-			  <div class='col-lg-offset-0 col-lg-5 col-md-offset-0 col-md-8 col-sm-offset-0 col-sm-19 col-xs-offset-1 col-xs-14'>
+			  <div class='offset-lg-0 col-lg-5 offset-md-0 col-md-8 offset-sm-0 col-sm-19 offset-xs-1 col-xs-14'>
                   <input v-model="tagsFilter" class="form-control" placeholder="Tags (type to filter)">
               </div>          
-              <div class='col-lg-offset-0 col-lg-4 col-md-offset-0 col-md-4 col-sm-offset-1 col-sm-5 col-xs-offset-1 col-xs-6'>
+              <div class='offset-lg-0 col-lg-4 offset-md-0 col-md-4 offset-sm-1 col-sm-5 offset-xs-1 col-xs-6'>
 				  <button @click="sortBy('value',!reverse)" class='form-control'>Value <i v-bind:class="[sortKey == 'value' && !reverse ? 'fa-angle-down':'fa-angle-up','fas sortBtn']"></i></button>                                  
               </div>
-              <div class='col-lg-offset-0 col-lg-3 col-md-offset-0 col-md-4 col-sm-offset-0 col-sm-4 col-xs-offset-1 col-xs-6 dateHead'>
+              <div class='offset-lg-0 col-lg-3 offset-md-0 col-md-4 offset-sm-0 col-sm-4 offset-xs-1 col-xs-6 dateHead'>
                   <button @click="sortBy('date',!reverse)" class='form-control'>Date <i v-bind:class="[sortKey == 'date' && !reverse ? 'fa-angle-down':'fa-angle-up','fas sortBtn']"></i></button>                                  
               </div>
             </div>
@@ -106,7 +106,7 @@ export default {
 	font-family: "Arial Black", "Arial Bold", Gadget, sans-serif;
 	font-size: 45px;
 	text-align: center;
-	height: 15%;
+	height: 25%;
 	vertical-align: middle;
 }
 
