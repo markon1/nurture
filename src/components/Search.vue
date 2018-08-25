@@ -5,29 +5,25 @@
 				<div class='headerText'><span>S</span><span class='greenUnderlined'>EARC</span><span>H</span></div>
 			</div>
 			<div class='row filters'>
-				<div class='offset-lg-1 col-lg-2 offset-md-0 col-md-3 offset-sm-1 col-sm-3 offset-xs-2 col-xs-8'>
+				<div class='offset-lg-1 col-lg-3 offset-md-0 col-md-3 offset-sm-1 col-sm-3 offset-1 col-10'>
 					<input v-model='nameTitleFilter' class="form-control" placeholder="Name/Title (type to filter)">
 				</div>
-				<div class='offset-lg-0 col-lg-2 offset-md-0 col-md-2 offset-sm-0 col-sm-3 offset-xs-2 col-xs-8'>
+				<div class='offset-lg-0 col-lg-2 offset-md-0 col-md-2 offset-sm-0 col-sm-3 offset-1 col-10'>
 					<input v-model='notesFilter' class="form-control" placeholder="Notes (type to filter)">
 				</div>  
-				<div class='offset-lg-0 col-lg-3 offset-md-0 col-md-3 offset-sm-0 col-sm-4 offset-xs-2 col-xs-8'>
+				<div class='offset-lg-0 col-lg-2 offset-md-0 col-md-3 offset-sm-0 col-sm-4 offset-1 col-10'>
 					<input v-model="tagsFilter" class="form-control" placeholder="Tags (type to filter)">
 				</div>    
-				<div class='offset-lg-0 col-lg-1 offset-md-0 col-md-2 offset-sm-1 col-sm-3 offset-xs-2 col-xs-4'>
-					<button @click="sortBy('value')" class='form-control'>Value <i v-bind:class="[sortKey == 'value' && valuesDesc ? 'fa-angle-down':'fa-angle-up','fa sortBtn']"></i></button>                                  
+				<div class='offset-lg-0 col-lg-2 offset-md-0 col-md-2 offset-sm-1 col-sm-3 offset-1 col-5'>
+					<button @click="sortBy('value')" class='form-control'>Value <i v-bind:class="[valuesDesc ? 'fa-angle-down':'fa-angle-up','fa sortBtn']"></i></button>                                  
 				</div>
-				<div class='offset-lg-0 col-lg-2 offset-md-0 col-md-2 offset-sm-0 col-sm-3 offset-xs-0 col-xs-4'>
-					<button @click="sortBy('date')" class='form-control'>Date <i v-bind:class="[sortKey == 'date' && datesDesc ? 'fa-angle-down':'fa-angle-up','fa sortBtn']"></i></button>                                  
+				<div class='offset-lg-0 col-lg-2 offset-md-0 col-md-2 offset-sm-0 col-sm-3 offset-0 col-5'>
+					<button @click="sortBy('date')" class='form-control'>Date <i v-bind:class="[datesDesc ? 'fa-angle-down':'fa-angle-up','fa sortBtn']"></i></button>                                  
 				</div>    
 			</div>
 		</div>
-        <br>
-        <hr>
         <div class='container-fluid'>
-          <div class='row' v-for='conn in filteredConnections' v-bind:key='conn._id'>
-            <connection :connProp='conn' :overdue='false' :apiURL='apiURL'></connection>          
-          </div>
+            <connection v-for='conn in filteredConnections' v-bind:key='conn._id' :connProp='conn' :overdue='false' :apiURL='apiURL'></connection>
         </div>
     </div>
 </template>
@@ -94,13 +90,7 @@ export default {
 <style scoped>
 .row {
 	margin-bottom: 15px;
-}
-
-.headingWrapper {
-	margin-bottom: 10px;
-}
-
-.dateHead {
-	text-align: left !important;
+	padding-bottom: 15px;
+	border-bottom: 1px solid black;
 }
 </style>
