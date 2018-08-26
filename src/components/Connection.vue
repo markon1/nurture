@@ -154,6 +154,10 @@ export default {
 	padding-left: 10px;
 }
 
+.notes textarea:focus {
+	outline-color: #fed136 !important;
+}
+
 ::-webkit-scrollbar-track {
 	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 	border-radius: 10px;
@@ -169,6 +173,17 @@ export default {
 	border-radius: 10px;
 	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 	background-color: #555;
+}
+
+.input-wrapper {
+	cursor: pointer !important;
+}
+
+.input-wrapper:active,
+.input-wrapper:focus {
+	border-color: #fed136 !important;
+	box-shadow: inset 0 1px 1px #fed136, 0 0 8px #fed136 !important;
+	border-radius: 0px !important;
 }
 
 .input-wrapper > .input {
