@@ -1,17 +1,23 @@
 <template>
   <div class='row connection'>
-    <div v-bind:class="[ overdue ? 'offset-lg-0 col-lg-1 offset-md-0 col-md-1 offset-sm-1 col-sm-3 offset-1 col-3' : 'offset-lg-1 col-lg-1 offset-md-0 col-md-1 offset-sm-1 col-sm-3 offset-1 col-3','info']">
-      <img :src='conn.info.profileImg' class='profileImg'>
-    </div>
-    <div v-bind:class="[ overdue ? 'offset-lg-0 col-lg-2 offset-md-0 col-md-2 offset-sm-0 col-sm-7 offset-0 col-8' : 'offset-lg-0 col-lg-2 offset-md-0 col-md-2 offset-sm-0 col-sm-7 offset-0 col-8','infoText']">
-      <a :href='conn.connURL' target='_blank'>{{conn.info.name}}</a>
-      <br>
-      <p>{{conn.info.bio}}</p>
+    <div v-bind:class="[ overdue ? 'offset-lg-0 col-lg-3 offset-md-0 col-md-3 offset-sm-1 col-sm-10 offset-1 col-11' : 'offset-lg-0 col-lg-3 offset-md-0 col-md-3 offset-sm-1 col-sm-10 offset-1 col-11','info']">
+		<div>
+			<a :href='conn.connURL' target='_blank' class='profileImgLink'>
+				<img :src='conn.info.profileImg' class='profileImg'>
+			</a>
+		</div>
+		<div class='infoText'>
+			<p class='name'>
+				<a :href='conn.connURL' target='_blank'>{{conn.info.name}}</a>
+			</p>
+			<br>
+			<p class='title'>{{conn.info.bio}}</p>
+		</div>
     </div>
     <div v-bind:class="[ overdue ? 'offset-lg-0 col-lg-2 offset-md-0 col-md-2 offset-sm-1 col-sm-10 offset-1 col-11' : 'offset-lg-0 col-lg-2 offset-md-0 col-md-2 offset-sm-1 col-sm-10 offset-1 col-11','notes']">
       <textarea v-model.lazy='conn.notes' @change="patch('notes')" placeholder="Notes"></textarea>
     </div>
-	<div v-bind:class="[ overdue ? 'offset-lg-0 col-lg-2 offset-md-0 col-md-2 offset-sm-1 col-sm-10 offset-1 col-11' : 'offset-lg-0 col-lg-2 offset-md-0 col-md-2 offset-sm-1 col-sm-10 offset-1 col-11','tags']">
+	<div v-bind:class="[ overdue ? 'offset-lg-0 col-lg-2 offset-md-0 col-md-2 offset-sm-1 col-sm-10 offset-1 col-11' : 'offset-lg-0 col-lg-3 offset-md-0 col-md-2 offset-sm-1 col-sm-10 offset-1 col-11','tags']">
       <input-tag :tags.sync='conn.tags' @update:tags="patch('tags')"></input-tag>
     </div>
 	<div v-bind:class="[ overdue ? 'offset-lg-0 col-lg-2 offset-md-0 col-md-2 offset-sm-1 col-sm-3 offset-1 col-11' : 'offset-lg-0 col-lg-2 offset-md-0 col-md-2 offset-sm-1 col-sm-3 offset-1 col-11','value']">
@@ -76,16 +82,18 @@ export default {
 </script>
 
 <style>
-.connection {
-	width: 100%;
-}
-
 .connection > div {
 	margin-bottom: 10px;
 }
 
+.profileImgLink {
+	float: left;
+	margin-right: 10px;
+}
+
 .date-picker {
 	width: 128px;
+	margin: 0 auto !important;
 }
 
 .vue-star-rating {
@@ -121,24 +129,25 @@ export default {
 	border-radius: 80px;
 }
 
-.infoText {
-	padding-left: 32px;
-	min-height: 80px;
-	overflow-y: auto;
-}
-
-.infoText > a {
+.name > a {
+	float: left;
+	margin-right: 10px;
 	color: #704b1e !important;
+	font-size: 16px !important;
+	font-weight: 900;
 }
 
-.infoText > p {
+.title {
 	color: #babfc2 !important;
+	overflow: hidden !important;
+	font-size: 13px !important;
 }
 
 .notes textarea {
 	resize: none;
 	width: 100%;
 	height: 120px;
+	font-size: 13px !important;
 	background-color: #fbfbfb;
 	border: 1px solid rgb(204, 204, 204);
 	padding-top: 18px;
@@ -164,6 +173,16 @@ export default {
 
 .input-wrapper > .input {
 	line-height: 18px !important;
+}
+
+.date-panel {
+	position: fixed !important;
+	height: 320px !important;
+	left: 0px !important;
+	right: 0px !important;
+	top: 0px !important;
+	bottom: 0px !important;
+	margin: auto !important;
 }
 
 .vue-input-tag-wrapper {

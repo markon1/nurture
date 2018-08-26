@@ -15,10 +15,10 @@
 					<input v-model="tagsFilter" class="form-control" placeholder="Tags (type to filter)">
 				</div>          
 				<div class='offset-lg-0 col-lg-2 offset-md-0 col-md-2 offset-sm-1 col-sm-3 offset-1 col-5'>
-					<button @click="sortBy('value')" class='form-control'>Value <i v-bind:class="[valuesDesc ? 'fa-angle-down':'fa-angle-up','fa sortBtn']"></i></button>                                  
+					<button @click="sortBy('value')" class='form-control sortBtn'>Value <i v-bind:class="[valuesDesc ? 'fa-angle-down':'fa-angle-up','fa sortIcon']"></i></button>                                  
 				</div>
 				<div class='offset-lg-0 col-lg-2 offset-md-0 col-md-2 offset-sm-0 col-sm-3 offset-0 col-5'>
-					<button @click="sortBy('date')" class='form-control'>Date <i v-bind:class="[datesDesc ? 'fa-angle-down':'fa-angle-up','fa sortBtn']"></i></button>                                  
+					<button @click="sortBy('date')" class='form-control sortBtn'>Date <i v-bind:class="[datesDesc ? 'fa-angle-down':'fa-angle-up','fa sortIcon']"></i></button>                                  
 				</div>
 			</div>
 		</div>
