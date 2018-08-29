@@ -1,6 +1,6 @@
 <template>
   <div class='row connection'>
-    <div v-bind:class="[ overdue ? 'offset-lg-0 col-lg-3 offset-md-0 col-md-3 offset-sm-1 col-sm-10 offset-1 col-11' : 'offset-lg-0 col-lg-3 offset-md-0 col-md-3 offset-sm-1 col-sm-10 offset-1 col-11','info']">
+    <div v-bind:class="[ overdue ? 'offset-lg-0 col-lg-3 offset-md-0 col-md-3 offset-sm-1 col-sm-10 col-12' : 'offset-lg-0 col-lg-3 offset-md-0 col-md-3 offset-sm-1 col-sm-10 col-12','info']">
 		<div>
 			<a :href='conn.connURL' target='_blank' class='profileImgLink'>
 				<img :src='conn.info.profileImg' class='profileImg'>
@@ -14,19 +14,19 @@
 			<p class='title'>{{conn.info.bio}}</p>
 		</div>
     </div>
-    <div v-bind:class="[ overdue ? 'offset-lg-0 col-lg-2 offset-md-0 col-md-2 offset-sm-1 col-sm-10 offset-1 col-11' : 'offset-lg-0 col-lg-2 offset-md-0 col-md-2 offset-sm-1 col-sm-10 offset-1 col-11','notes']">
+    <div v-bind:class="[ overdue ? 'offset-lg-0 col-lg-2 offset-md-0 col-md-2 offset-sm-1 col-sm-10 col-12' : 'offset-lg-0 col-lg-2 offset-md-0 col-md-2 offset-sm-1 col-sm-10 col-12','notes']">
       <textarea v-model.lazy='conn.notes' @change="patch('notes')" placeholder="Notes"></textarea>
     </div>
-	<div v-bind:class="[ overdue ? 'offset-lg-0 col-lg-2 offset-md-0 col-md-2 offset-sm-1 col-sm-10 offset-1 col-11' : 'offset-lg-0 col-lg-3 offset-md-0 col-md-2 offset-sm-1 col-sm-10 offset-1 col-11','tags']">
+	<div v-bind:class="[ overdue ? 'offset-lg-0 col-lg-2 offset-md-0 col-md-2 offset-sm-1 col-sm-10 col-12' : 'offset-lg-0 col-lg-3 offset-md-0 col-md-2 offset-sm-1 col-sm-10 col-12','tags']">
       <input-tag :tags.sync='conn.tags' @update:tags="patch('tags')"></input-tag>
     </div>
-	<div v-bind:class="[ overdue ? 'offset-lg-0 col-lg-2 offset-md-0 col-md-2 offset-sm-1 col-sm-3 offset-1 col-11' : 'offset-lg-0 col-lg-2 offset-md-0 col-md-2 offset-sm-1 col-sm-3 offset-1 col-11','value']">
+	<div v-bind:class="[ overdue ? 'offset-lg-0 col-lg-2 offset-md-0 col-md-2 offset-sm-1 col-sm-3 col-12' : 'offset-lg-0 col-lg-2 offset-md-0 col-md-2 offset-sm-1 col-sm-3 col-12','value']">
       <star-rating v-model='conn.value' :star-size='22' :show-rating='false' @rating-selected="patch('value')"></star-rating>
     </div>
-    <div v-bind:class="[ overdue ? 'offset-lg-0 col-lg-2 offset-md-0 col-md-2 offset-sm-0 col-sm-3 offset-1 col-11' : 'offset-lg-0 col-lg-2 offset-md-0 col-md-2 offset-sm-0 col-sm-3 offset-1 col-11','dueDate']">
+    <div v-bind:class="[ overdue ? 'offset-lg-0 col-lg-2 offset-md-0 col-md-2 offset-sm-0 col-sm-3 col-12' : 'offset-lg-0 col-lg-2 offset-md-0 col-md-2 offset-sm-0 col-sm-3 col-12','dueDate']">
       <datepicker v-model='conn.date' input-class='form-control dateInput'></datepicker>
     </div>    
-	<div  v-if="overdue" class='actions offset-lg-0 col-lg-1 offset-md-0 col-md-1 offset-sm-0 col-sm-4 offset-1 col-11'>
+	<div  v-if="overdue" class='actions offset-lg-0 col-lg-1 offset-md-0 col-md-1 offset-sm-0 col-sm-4 col-12'>
       <button class="btn doneBtn" @click="done">DONE</button><button class="btn snoozeBtn" @click="snooze">SNOOZE</button>
     </div>
   </div>
