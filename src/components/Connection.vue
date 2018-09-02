@@ -20,7 +20,7 @@
 	<div v-bind:class="[ overdue ? 'offset-xl-0 col-xl-2 offset-sm-1 col-sm-10 col-12' : 'offset-xl-0 col-xl-3 offset-sm-1 col-sm-10 col-12','tags']">
       <input-tag :tags.sync='conn.tags' @update:tags="patch('tags')"></input-tag>
     </div>
-	<div v-bind:class="[ overdue ? 'offset-xl-0 col-xl-2 offset-sm-1 col-sm-3 col-12' : 'offset-xl-0 col-xl-1 offset-sm-1 col-sm-3 col-12','value']">
+	<div v-bind:class="[ overdue ? 'offset-xl-0 col-xl-2 offset-sm-1 col-sm-3 col-12' : 'offset-xl-0 col-xl-2 offset-sm-1 col-sm-3 col-12','value']">
       <star-rating v-model='conn.value' :star-size='22' :show-rating='false' @rating-selected="patch('value')"></star-rating>
     </div>
     <div v-bind:class="[ overdue ? 'offset-xl-0 col-xl-2 offset-sm-0 col-sm-3 col-12' : 'offset-xl-0 col-xl-2 offset-sm-0 col-sm-3 col-12','dueDate']">
