@@ -5,19 +5,19 @@
 				<div class='headerText'><span>S</span><span class='greenUnderlined'>EARC</span><span>H</span></div>
 			</div>
 			<div class='row filters'>
-				<div class='offset-lg-0 col-lg-3 offset-md-0 col-md-3 offset-sm-1 col-sm-3 col-12'>
+				<div class='offset-xl-0 col-xl-3 offset-md-0 col-md-3 offset-sm-1 col-sm-3 col-12'>
 					<input v-model='nameTitleFilter' class="form-control" placeholder="Name/Title (type to filter)">
 				</div>
-				<div class='offset-lg-0 col-lg-2 offset-md-0 col-md-2 offset-sm-0 col-sm-3 col-12'>
+				<div class='offset-xl-0 col-xl-2 offset-md-0 col-md-2 offset-sm-0 col-sm-3 col-12'>
 					<input v-model='notesFilter' class="form-control" placeholder="Notes (type to filter)">
 				</div>  
-				<div class='offset-lg-0 col-lg-3 offset-md-0 col-md-3 offset-sm-0 col-sm-4 col-12'>
+				<div class='offset-xl-0 col-xl-3 offset-md-0 col-md-3 offset-sm-0 col-sm-4 col-12'>
 					<input v-model="tagsFilter" class="form-control" placeholder="Tags (type to filter)">
 				</div>    
-				<div class='offset-lg-0 col-lg-2 offset-md-0 col-md-2 offset-sm-1 col-sm-3 col-6'>
+				<div class='offset-xl-0 col-xl-2 offset-md-0 col-md-2 offset-sm-1 col-sm-3 col-6'>
 					<button @click="sortBy('value')" class='form-control sortBtn'>Value <i v-bind:class="[valuesDesc ? 'fa-angle-down':'fa-angle-up','fa sortIcon']"></i></button>                                  
 				</div>
-				<div class='offset-lg-0 col-lg-2 offset-md-0 col-md-2 offset-sm-0 col-sm-3 col-6'>
+				<div class='offset-xl-0 col-xl-2 offset-md-0 col-md-2 offset-sm-0 col-sm-3 col-6'>
 					<button @click="sortBy('date')" class='form-control sortBtn'>Date <i v-bind:class="[datesDesc ? 'fa-angle-down':'fa-angle-up','fa sortIcon']"></i></button>                                  
 				</div>    
 			</div>

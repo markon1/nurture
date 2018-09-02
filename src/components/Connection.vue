@@ -1,6 +1,6 @@
 <template>
   <div class='row connection'>
-    <div v-bind:class="[ overdue ? 'offset-lg-0 col-lg-3 offset-md-0 col-md-3 offset-sm-1 col-sm-10 col-12' : 'offset-lg-0 col-lg-3 offset-md-0 col-md-3 offset-sm-1 col-sm-10 col-12','info']">
+    <div v-bind:class="[ overdue ? 'offset-xl-0 col-xl-3 offset-sm-1 col-sm-10 col-12' : 'offset-xl-0 col-xl-3 offset-sm-1 col-sm-10 col-12','info']">
 		<div>
 			<a :href='conn.connURL' target='_blank' class='profileImgLink'>
 				<img :src='conn.info.profileImg' class='profileImg'>
@@ -14,20 +14,26 @@
 			<p class='title'>{{conn.info.bio}}</p>
 		</div>
     </div>
-    <div v-bind:class="[ overdue ? 'offset-lg-0 col-lg-2 offset-md-0 col-md-2 offset-sm-1 col-sm-10 col-12' : 'offset-lg-0 col-lg-2 offset-md-0 col-md-2 offset-sm-1 col-sm-10 col-12','notes']">
+    <div v-bind:class="[ overdue ? 'offset-xl-0 col-xl-2 offset-sm-1 col-sm-10 col-12' : 'offset-xl-0 col-xl-2 offset-sm-1 col-sm-10 col-12','notes']">
       <textarea v-model.lazy='conn.notes' @change="patch('notes')" placeholder="Notes"></textarea>
     </div>
-	<div v-bind:class="[ overdue ? 'offset-lg-0 col-lg-2 offset-md-0 col-md-2 offset-sm-1 col-sm-10 col-12' : 'offset-lg-0 col-lg-3 offset-md-0 col-md-2 offset-sm-1 col-sm-10 col-12','tags']">
+	<div v-bind:class="[ overdue ? 'offset-xl-0 col-xl-2 offset-sm-1 col-sm-10 col-12' : 'offset-xl-0 col-xl-3 offset-sm-1 col-sm-10 col-12','tags']">
       <input-tag :tags.sync='conn.tags' @update:tags="patch('tags')"></input-tag>
     </div>
-	<div v-bind:class="[ overdue ? 'offset-lg-0 col-lg-2 offset-md-0 col-md-2 offset-sm-1 col-sm-3 col-12' : 'offset-lg-0 col-lg-2 offset-md-0 col-md-2 offset-sm-1 col-sm-3 col-12','value']">
+	<div v-bind:class="[ overdue ? 'offset-xl-0 col-xl-2 offset-sm-1 col-sm-3 col-12' : 'offset-xl-0 col-xl-1 offset-sm-1 col-sm-3 col-12','value']">
       <star-rating v-model='conn.value' :star-size='22' :show-rating='false' @rating-selected="patch('value')"></star-rating>
     </div>
-    <div v-bind:class="[ overdue ? 'offset-lg-0 col-lg-2 offset-md-0 col-md-2 offset-sm-0 col-sm-3 col-12' : 'offset-lg-0 col-lg-2 offset-md-0 col-md-2 offset-sm-0 col-sm-3 col-12','dueDate']">
-      <datepicker v-model='conn.date' input-class='form-control dateInput'></datepicker>
+    <div v-bind:class="[ overdue ? 'offset-xl-0 col-xl-2 offset-sm-0 col-sm-3 col-12' : 'offset-xl-0 col-xl-2 offset-sm-0 col-sm-3 col-12','dueDate']">
+      <div class='dateWithIcon'>
+		  <datepicker v-model='conn.date' input-class='form-control dateInput'></datepicker>
+		<div class='calendarIconDiv'>
+			<img class='calendarIcon' src='/static/images/calendarIcon.png'>
+		</div>
+      </div>
     </div>    
-	<div  v-if="overdue" class='actions offset-lg-0 col-lg-1 offset-md-0 col-md-1 offset-sm-0 col-sm-4 col-12'>
-      <button class="btn doneBtn" @click="done">DONE</button><button class="btn snoozeBtn" @click="snooze">SNOOZE</button>
+	<div  v-if="overdue" class='actions offset-xl-0 col-xl-1 offset-sm-0 col-sm-4 col-12'>
+      <button class="btn doneBtn d-inline-block d-xl-block mb-xl-2" @click="done">DONE</button>
+	  <button class="btn snoozeBtn d-inline-block d-xl-block" @click="snooze">SNOOZE</button>
     </div>
   </div>
 </template>
@@ -93,7 +99,8 @@ export default {
 
 .date-picker {
 	width: 128px;
-	margin: 0 auto !important;
+	display: inline-block;
+	vertical-align: middle !important;
 }
 
 .vue-star-rating {
@@ -190,6 +197,32 @@ export default {
 	line-height: 18px !important;
 }
 
+.dateWithIcon {
+	width: 163px !important;
+	margin: 0 auto !important;
+}
+
+.dateInput {
+	vertical-align: middle !important;
+}
+
+.calendarIcon {
+	vertical-align: middle;
+}
+
+.calendarIconDiv {
+	display: inline-block !important;
+	height: 32px;
+	vertical-align: middle;
+	padding: 1px 4px 6px 10px;
+	border: 1px solid #cccccc;
+	background-color: #f6f6f6;
+	border-top-right-radius: 2px;
+	border-bottom-right-radius: 2px;
+	margin-left: -5px;
+	border-left: 0px;
+}
+
 .date-panel {
 	position: fixed !important;
 	height: 320px !important;
@@ -198,6 +231,7 @@ export default {
 	top: 0px !important;
 	bottom: 0px !important;
 	margin: auto !important;
+	box-shadow: grey 2px 2px 2px 2px;
 }
 
 .vue-input-tag-wrapper {
@@ -232,10 +266,10 @@ export default {
 }
 
 .actions > button {
-	display: inline-block !important;
 	color: #ffffff !important;
 	font-size: 12px !important;
 	padding: 6px 4px 6px 4px !important;
+	width: 64px !important;
 }
 
 .doneBtn {
