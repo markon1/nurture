@@ -48,7 +48,7 @@ module.exports = {
 
     // Paths
     assetsRoot: path.resolve(__dirname, "../../nurture-backend/public/static/main-app"),
-    assetsSubDirectory: "static",
+    assetsSubDirectory: "",
     assetsPublicPath: "/",
 
     /**
