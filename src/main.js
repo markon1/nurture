@@ -5,7 +5,7 @@ import Connection from "./components/Connection";
 import Search from "./components/Search";
 import Overdue from "./components/Overdue";
 import StarRating from "vue-star-rating";
-import Datepicker from "vue-date";
+import Datepicker from "./components/Datepicker";
 import InputTag from "vue-input-tag";
 
 Vue.component("connection", Connection);
